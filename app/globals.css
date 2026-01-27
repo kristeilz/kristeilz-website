@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* ===============================
+   DESIGN TOKENS (Tailwind v4)
+   =============================== */
+@theme inline {
+  /* Brand Colors */
+  --color-gold: #d4af37;
+  --color-gold-soft: #e6c86e;
+  --color-black: #0a0a0a;
+  --color-white: #ededed;
+
+  /* Typography */
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+/* ===============================
+   BASE STYLES
+   =============================== */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove default focus outline glow */
