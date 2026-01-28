@@ -49,51 +49,46 @@ export default function Home() {
       <section className="bg-black py-32">
         <div className="max-w-7xl mx-auto px-6">
 
-        {/* Section Header */}
-        <div className="mb-20 text-center">
-          <p className="tracking-[0.35em] text-xs text-white/60 uppercase mb-4">
-            Our Creations
-          </p>
-          <h2 className="font-serif text-3xl md:text-5xl text-white">
-            Signature Collections
-          </h2>
-        </div>
-
-        {/* Collection Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-
-          {/* Collection Card */}
-          {[
-            "Necklaces",
-            "Rings",
-            "Bracelets",
-            ].map((item, i) => (
-          <a
-            key={i}
-            href="/collections"
-            className="group relative overflow-hidden"
-          >
-            {/* Image Placeholder */}
-            <div className="relative aspect-[3/4] bg-black border border-white/10 overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(230,193,122,0.18),_transparent_60%)] opacity-0 group-hover:opacity-100 transition duration-700" />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-700" />
-            </div>
-
-            {/* Text */}
-            <div className="mt-6 text-center">
-              <h3 className="font-serif text-xl text-white group-hover:text-[#E6C17A] transition">
-                {item}
-              </h3>
-              <p className="mt-2 text-xs tracking-widest text-white/50 uppercase">
-                Explore
-              </p>
-            </div>
-          </a>
-      
-
+          {/* Section Header */}
+          <div className="mb-20 text-center">
+            <p className="tracking-[0.35em] text-xs text-white/60 uppercase mb-4">
+              Our Creations
+            </p>
+            <h2 className="font-serif text-3xl md:text-5xl text-white">
+              Signature Collections
+            </h2>
           </div>
+
+          {/* Collection Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {["Necklaces", "Rings", "Bracelets"].map((item, i) => (
+              <a
+                key={i}
+                href="/collections"
+                className="group relative overflow-hidden"
+              >
+                {/* Image Placeholder */}
+                <div className="relative aspect-[3/4] bg-black border border-white/10 overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(230,193,122,0.18),_transparent_60%)] opacity-0 group-hover:opacity-100 transition duration-700" />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-700" />
+                </div>
+
+                {/* Text */}
+                <div className="mt-6 text-center">
+                  <h3 className="font-serif text-xl text-white group-hover:text-[#E6C17A] transition">
+                    {item}
+                  </h3>
+                  <p className="mt-2 text-xs tracking-widest text-white/50 uppercase">
+                    Explore
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+
         </div>
       </section>
+
       
       {/* Brand Story Section */}
       <section className="bg-black py-40 border-t border-white/10">
