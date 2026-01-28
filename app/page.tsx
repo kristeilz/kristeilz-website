@@ -3,7 +3,7 @@ export default function Home() {
     <main className="min-h-screen bg-[color:var(--color-black)]">
 
       {/* Hero Section */}
-      <section className="pt-32 flex flex-col items-center justify-center text-center min-h-[85vh]">
+      <section className="flex flex-col items-center justify-center text-center min-h-[85vh]">
         <h2 className="text-[color:var(--color-gold)] text-6xl md:text-7xl font-light tracking-wide">
           KristeilZ
         </h2>
