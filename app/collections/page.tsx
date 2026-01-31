@@ -1,33 +1,40 @@
-export default function CollectionsPage() {
-  const collections = [
-    { name: "Rings", desc: "Modern statement rings" },
-    { name: "Neckpieces", desc: "Elegant fusion necklaces" },
-    { name: "Earrings", desc: "Bold & minimal designs" },
-    { name: "Bracelets", desc: "Contemporary wristwear" },
-  ];
+import { requireSubscription } from "@/lib/requireSubscription"
+
+export default async function CollectionsPage() {
+  const isGold = await requireSubscription("gold")
 
   return (
-    <section className="min-h-screen bg-black px-6 py-24">
-      <div className="max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-light text-gold mb-4">
-          Our Collections
-        </h1>
-        <p className="text-gray-400 mb-16">
-          Crafted fusion jewellery for modern brands
-        </p>
+    <main className="bg-black text-white min-h-screen px-12 py-24">
+      <h1 className="text-4xl font-serif mb-16">Collections</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {collections.map((item) => (
-            <div
-              key={item.name}
-              className="border border-gold/40 p-8 hover:bg-gold/10 transition duration-300"
-            >
-              <h3 className="text-xl text-gold mb-2">{item.name}</h3>
-              <p className="text-gray-400 text-sm">{item.desc}</p>
-            </div>
-          ))}
+      {/* Public */}
+      <section>
+        <h2 className="text-xl mb-6">Public Collection</h2>
+        <div className="grid grid-cols-3 gap-8">
+          <div className="h-64 bg-white/5" />
+          <div className="h-64 bg-white/5" />
+          <div className="h-64 bg-white/5" />
         </div>
-      </div>
-    </section>
-  );
+      </section>
+
+      {/* Privé */}
+      <section className="mt-24">
+        <h2 className="text-xl mb-6 text-[#E6C17A]">
+          Privé Gold Collection
+        </h2>
+
+        {isGold ? (
+          <div className="grid grid-cols-3 gap-8">
+            <div className="h-64 bg-[#E6C17A]/20" />
+            <div className="h-64 bg-[#E6C17A]/20" />
+            <div className="h-64 bg-[#E6C17A]/20" />
+          </div>
+        ) : (
+          <p className="text-white/50">
+            🔒 Available to Privé Gold members only
+          </p>
+        )}
+      </section>
+    </main>
+  )
 }
