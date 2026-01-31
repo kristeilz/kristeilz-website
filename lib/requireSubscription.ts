@@ -1,25 +1,33 @@
 import { supabase } from "@/lib/supabase"
 
+/**
+ * Vercel-safe subscription check
+ * - No cookies()
+ * - No auth during build
+ * - Never crashes
+ */
 export async function requireSubscription(
-  required: "silver" | "gold" | "black"
-) {
+  required: "silver" | "gold" | "black",
+  userId?: string
+): Promise<boolean> {
   try {
     // Prevent build-time execution
-    if (typeof window !== "undefined") return false
+    if (!userId) return false
 
     const { data, error } = await supabase
       .from("users")
       .select("subscription, status")
-      .limit(1)
+      .eq("id", userId)
       .single()
 
     if (error || !data) return false
     if (data.status !== "active") return false
 
-    const levels = ["silver", "gold", "black"]
+    const hierarchy = ["silver", "gold", "black"]
+
     return (
-      levels.indexOf(data.subscription) >=
-      levels.indexOf(required)
+      hierarchy.indexOf(data.subscription) >=
+      hierarchy.indexOf(required)
     )
   } catch {
     return false
