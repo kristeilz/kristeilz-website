@@ -1,41 +1,27 @@
-// lib/requireSubscription.ts
-import { cookies } from "next/headers"
-import { createClient } from "@supabase/supabase-js"
+import { supabase } from "@/lib/supabase"
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
-/**
- * Checks if the current user has the required subscription
- * Safe: never throws, never crashes pages
- */
-export async function requireSubscription(required: "silver" | "gold" | "black") {
+export async function requireSubscription(
+  required: "silver" | "gold" | "black"
+) {
   try {
-    const cookieStore = cookies()
-    const userId = cookieStore.get("user_id")?.value
-
-    // No user → no access (but no crash)
-    if (!userId) return false
+    // Prevent build-time execution
+    if (typeof window !== "undefined") return false
 
     const { data, error } = await supabase
       .from("users")
       .select("subscription, status")
-      .eq("id", userId)
+      .limit(1)
       .single()
 
     if (error || !data) return false
     if (data.status !== "active") return false
 
-    const hierarchy = ["silver", "gold", "black"]
-
+    const levels = ["silver", "gold", "black"]
     return (
-      hierarchy.indexOf(data.subscription) >=
-      hierarchy.indexOf(required)
+      levels.indexOf(data.subscription) >=
+      levels.indexOf(required)
     )
   } catch {
-    // Absolute safety net
     return false
   }
 }
